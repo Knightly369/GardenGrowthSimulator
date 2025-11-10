@@ -11,24 +11,29 @@ namespace GardenGrowthSimulator
         public Plant(string name)
         {
             Name = name;
-            Height = 1;   // 初始高度
-            Health = 100; // 初始健康
+            Height = 1;
+            Health = 100;
         }
 
-        // 最簡單邏輯：平均越高，長越快；太低會掉血
         public void Grow(int sun, int water, int fert)
         {
-            int balance = (sun + water + fert) / 3; // 0–10
+            int balance = (sun + water + fert) / 3;
+
             if (balance >= 6)
             {
-                Height += balance / 2;             // +0~5
+                Height += balance / 2;
                 Health = Math.Min(100, Health + 2);
             }
             else
             {
-                Height += 1;                       // 低配也會微增
-                Health = Math.Max(0, Health - 5);  // 但健康下降
+                Height += 1;
+                Health = Math.Max(0, Health - 5);
             }
+        }
+
+        public string GetStatus()
+        {
+            return $"{Name}：高度 {Height}，健康 {Health}";
         }
     }
 }
